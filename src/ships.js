@@ -3,13 +3,13 @@ class Ships {
         this.size = size;
         this.hp = size;
     }
-    set hit(1) {
-        this.hp = 1;
+    hit() {
+        this.hp -= 1;
     }
     isSunk() {
         if (this.hp == 0) {
-            return this.hp;
-        } else return this.hp;
+            return true;
+        } else return false;
     }
 }
 
