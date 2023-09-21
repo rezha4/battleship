@@ -1,1 +1,5 @@
-console.log("Hello")
+function testing(str) {
+    return str;
+}
+
+export { testing }
