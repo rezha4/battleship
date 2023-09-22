@@ -13,6 +13,9 @@ class GameBoard {
         }
         return gameBoard;
     }
+    placeShip(xCoordinate, yCoordinate, shipSize) {
+        this.board[xCoordinate][yCoordinate] = 1;
+    }
     //place ship function
     //coordinate
     //add 1 in that coordinate (ship is there)
