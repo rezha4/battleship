@@ -1,6 +1,9 @@
 class GameBoard {
-    constructor () {
+    constructor (playerName) {
         this.board = this.createGameBoard();
+        this.ships = [];
+        this.sunkenShips = 0;
+        this.player = playerName;
     }
     createGameBoard() {
         let gameBoard = [];
@@ -21,14 +24,21 @@ class GameBoard {
                 this.board[xCoordinate][yCoordinate + i] = ship;
             }
         }
+        this.ships.push(ship);
     }
-    //receive attack, x and y, turns that into 1. if ships in that, should call ship.hit()
     receiveAttack(xCoordinate, yCoordinate) {
         if (this.board[xCoordinate][yCoordinate] != 1 && this.board[xCoordinate][yCoordinate] != 0) {
             this.board[xCoordinate][yCoordinate].hit();
+            this.ships.forEach(ship => {
+                if (ship.isSunk() == true) {
+                    this.sunkenShips += 1;
+                }
+            });
+            if (this.sunkenShips == this.ships.length) {
+                return "los";
+            }
         }
         this.board[xCoordinate][yCoordinate] = 1;
-        //how to differentiate its a ship attack or a missed attack?
     }
 }
 

@@ -40,4 +40,11 @@ test("hit() works", () => {
     player.receiveAttack(5, 5);
     expect(player.board[5][5]).toBe(1);
     expect(player.board[5][2]).toBe(0);
+});
+
+test("all ship sunk success", () => {
+    const cruise = new Ships(2);
+    const player = new GameBoard("Player1");
+    player.placeShip(0, 0, cruise);
+    expect(player.receiveAttack(0, 0)).toBe("los");
 })
