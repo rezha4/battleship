@@ -7,7 +7,7 @@ class Ships {
         this.hp -= 1;
     }
     isSunk() {
-        if (this.hp == 0) {
+        if (this.hp <= 0) {
             return true;
         } else return false;
     }
