@@ -43,8 +43,19 @@ test("hit() works", () => {
 });
 
 test("all ship sunk success", () => {
-    const cruise = new Ships(2);
+    const cruise = new Ships(1);
     const player = new GameBoard("Player1");
     player.placeShip(0, 0, cruise);
     expect(player.receiveAttack(0, 0)).toBe("los");
-})
+});
+
+test("all ship sunk success", () => {
+    const patrol = new Ships(1);
+    const player = new GameBoard("Player1");
+    player.placeShip(0, 0, patrol);
+    const cruise = new Ships(3);
+    player.placeShip(3, 3, cruise);
+    player.receiveAttack(3, 3);
+    // expect(player.receiveAttack(0, 0)).toBe("los");
+    expect(player.board[3][3]).toBe(2);
+});
