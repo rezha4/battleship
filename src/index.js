@@ -1,5 +1,5 @@
 function testing(str) {
-    return str;
+  return str;
 }
 
-export { testing }
+export { testing };
