@@ -43,7 +43,7 @@ class GameBoard {
           }
         });
         if (this.sunkenShips >= this.ships.length) {
-          return "los";
+            return "los";
         }
       } else {
         this.board[xCoordinate][yCoordinate] = 1;

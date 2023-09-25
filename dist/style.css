@@ -1,0 +1,40 @@
+* {
+  margin: 0;
+  font-family: monospace;
+}
+
+.title {
+  text-align: center;
+  padding: 1rem;
+}
+
+main {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 1rem 0;
+    flex-wrap: wrap;
+}
+
+#game-board {
+    display: flex;
+    flex-wrap: wrap;
+    width: 220px;
+}
+
+#game-board:hover {
+    cursor: crosshair;
+}
+
+#game-board div {
+    height: 20px;
+    width: 20px;
+    border: solid 1px;
+}
+
+#game-board div:hover {
+    background-color: rgba(255, 0, 0, 0.795);
+}
+
+.ship {
+    background-color: blue;
+}
