@@ -21,7 +21,7 @@ main {
     width: 220px;
 }
 
-#game-board:hover {
+#player-two #game-board:hover {
     cursor: crosshair;
 }
 
@@ -31,7 +31,7 @@ main {
     border: solid 1px;
 }
 
-#game-board div:hover {
+#player-two #game-board div:hover {
     background-color: rgba(255, 0, 0, 0.795);
 }
 
