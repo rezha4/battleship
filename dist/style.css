@@ -9,32 +9,40 @@
 }
 
 main {
-    display: flex;
-    justify-content: space-evenly;
-    padding: 1rem 0;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 1rem 0;
+  flex-wrap: wrap;
 }
 
 #game-board {
-    display: flex;
-    flex-wrap: wrap;
-    width: 220px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 220px;
 }
 
 #player-two #game-board:hover {
-    cursor: crosshair;
+  cursor: crosshair;
 }
 
 #game-board div {
-    height: 20px;
-    width: 20px;
-    border: solid 1px;
+  height: 20px;
+  width: 20px;
+  border: solid 1px;
 }
 
 #player-two #game-board div:hover {
-    background-color: rgba(255, 0, 0, 0.795);
+  background-color: rgba(255, 0, 0, 0.795);
 }
 
 .ship {
-    background-color: blue;
+  background-color: blue;
+}
+
+.hit {
+  background-color: red;
+}
+
+.miss {
+  background-color: black;
 }

@@ -12,8 +12,7 @@ function renderBoard(player, playerBoard) {
       } else if (col == 2) {
         div.classList.add("hit");
         playerBoard.appendChild(div);
-      } else if (col != Number) {
-        div.classList.add("ship");
+      }else if (col != Number) {
         playerBoard.appendChild(div);
       }
     });
