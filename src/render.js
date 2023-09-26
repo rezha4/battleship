@@ -7,6 +7,9 @@ function renderBoard(player, playerBoard) {
       if (col == 0) {
         playerBoard.appendChild(div);
       } else if (col == 1) {
+        div.classList.add("miss");
+        playerBoard.appendChild(div);
+      } else if (col == 2) {
         div.classList.add("hit");
         playerBoard.appendChild(div);
       } else if (col != Number) {
@@ -17,4 +20,10 @@ function renderBoard(player, playerBoard) {
   });
 }
 
-export { renderBoard };
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
+
+export { renderBoard, removeAllChildNodes };

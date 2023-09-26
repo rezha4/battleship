@@ -4,6 +4,7 @@ class GameBoard {
     this.ships = [];
     this.sunkenShips = 0;
     this.player = playerName;
+    this.allShipsSank = false;
   }
   createGameBoard() {
     let gameBoard = [];
@@ -32,14 +33,14 @@ class GameBoard {
         this.board[x][y] += 1;
       } else {
         this.board[x][y].hit();
-        this.board[x][y] = 1;
+        this.board[x][y] = 2;
         this.ships.forEach((ship) => {
           if (ship.isSunk() == true) {
             this.sunkenShips += 1;
           }
         });
         if (this.sunkenShips >= this.ships.length) {
-          return "los";
+          this.allShipsSank = true;
         }
       }
     } else {

@@ -1,7 +1,7 @@
 import { GameBoard } from "./gameBoard";
 import { Ships } from "./ships";
 import { Player } from "./player";
-import { renderBoard } from "./render";
+import { renderBoard, removeAllChildNodes } from "./render";
 
 const playerOne = new GameBoard("Player-one");
 const playerTwo = new GameBoard("Player-two");
@@ -37,20 +37,7 @@ playerTwo.placeShip(8, 0, shipTwo1);
 
 renderBoard(playerTwo, playerTwoBoard);
 
-let x = null;
-let y = null;
-
-const playerTwoCells = document.querySelectorAll("#player-two #game-board div");
-playerTwoCells.forEach((cell) => {
-  cell.addEventListener("click", handlePlayerMove);
-});
-
-function computerMove() {
-  let x = Math.floor(Math.random() * 10);
-  let y = Math.floor(Math.random() * 10);
-  playerOne.receiveAttack(x, y);
-  renderBoard(playerOne, playerOneBoard);
-}
+let currentPlayer = "player";
 
 function handlePlayerMove(e) {
   const clickedCell = e.target;
@@ -61,7 +48,32 @@ function handlePlayerMove(e) {
     console.log("invalid move");
     return;
   }
+
   playerTwo.receiveAttack(x, y);
+  removeAllChildNodes(playerTwoBoard);
   renderBoard(playerTwo, playerTwoBoard);
-  setTimeout(computerMove(), 2000);
+
+  if (playerTwo.allShipsSank) {
+    alert("Player wins");
+    return;
+  } else {
+    currentPlayer = "computer";
+    setTimeout(computerMove(), 1000);
+  }
 }
+
+function computerMove() {
+  const x = Math.floor(Math.random() * 10);
+  const y = Math.floor(Math.random() * 10);
+  playerOne.receiveAttack(x, y);
+  removeAllChildNodes(playerOneBoard);
+  renderBoard(playerOne, playerOneBoard);
+
+  if (playerOne.allShipsSank) {
+    alert("Com wins");
+  } else {
+    currentPlayer = "player";
+  }
+}
+
+playerTwoBoard.addEventListener("click", handlePlayerMove)
