@@ -77,3 +77,5 @@ function computerMove() {
 }
 
 playerTwoBoard.addEventListener("click", handlePlayerMove)
+
+console.log("s")
