@@ -1,6 +1,7 @@
 import { GameBoard } from "./gameBoard";
 import { Ships } from "./ships";
 import { Player } from "./player";
+import { renderBoard } from "./render";
 
 const playerOne = new GameBoard("Player-one");
 const playerTwo = new GameBoard("Player-two");
@@ -20,19 +21,7 @@ playerOne.placeShip(4, 0, ship3);
 playerOne.placeShip(6, 0, ship2);
 playerOne.placeShip(8, 0, ship1);
 
-playerOne.board.forEach((row, x) => {
-  row.forEach((col, y) => {
-    const div = document.createElement("div");
-    div.dataset.x = x;
-    div.dataset.y = y;
-    if (col == 0 || col == 1) {
-      playerOneBoard.appendChild(div);
-    } else {
-      div.classList.add("ship");
-      playerOneBoard.appendChild(div);
-    }
-  });
-});
+renderBoard(playerOne, playerOneBoard);
 
 const shipTwo5 = new Ships(5);
 const shipTwo4 = new Ships(4);
@@ -46,33 +35,33 @@ playerTwo.placeShip(4, 0, shipTwo3);
 playerTwo.placeShip(6, 0, shipTwo2);
 playerTwo.placeShip(8, 0, shipTwo1);
 
-playerTwo.board.forEach((row, x) => {
-  row.forEach((col, y) => {
-    const div = document.createElement("div");
-    div.dataset.x = x;
-    div.dataset.y = y;
-    if (col == 0 || col == 1) {
-      playerTwoBoard.appendChild(div);
-    } else {
-      div.classList.add("ship");
-      playerTwoBoard.appendChild(div);
-    }
-  });
-});
+renderBoard(playerTwo, playerTwoBoard);
 
-let x;
-let y;
+let x = null;
+let y = null;
 
 const playerTwoCells = document.querySelectorAll("#player-two #game-board div");
 playerTwoCells.forEach((cell) => {
-  cell.addEventListener("click", () => {
-    x = parseInt(cell.dataset.x);
-    y = parseInt(cell.dataset.y);
-    console.log(x + y);
-  });
+  cell.addEventListener("click", handlePlayerMove);
 });
 
-let turn = 0;
-if (turn % 2 == 0) {
-} else {
+function computerMove() {
+  let x = Math.floor(Math.random() * 10);
+  let y = Math.floor(Math.random() * 10);
+  playerOne.receiveAttack(x, y);
+  renderBoard(playerOne, playerOneBoard);
+}
+
+function handlePlayerMove(e) {
+  const clickedCell = e.target;
+  const x = parseInt(clickedCell.dataset.x);
+  const y = parseInt(clickedCell.dataset.y);
+
+  if (playerTwo.board[x][y] == 1) {
+    console.log("invalid move");
+    return;
+  }
+  playerTwo.receiveAttack(x, y);
+  renderBoard(playerTwo, playerTwoBoard);
+  setTimeout(computerMove(), 2000);
 }

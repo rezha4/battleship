@@ -72,5 +72,6 @@ test("attacking the same spot twice doesnt change value, or call hit", () => {
   player.receiveAttack(0, 0);
   player.receiveAttack(0, 0);
   expect(player.board[3][3]).toBe(1);
-  expect(player.board[0][0].hp).toBe(0);
+  expect(player.board[0][0]).toBe(1);
+  expect(patrol.hp).toBe(0);
 });

@@ -16,38 +16,34 @@ class GameBoard {
     }
     return gameBoard;
   }
-  placeShip(xCoordinate, yCoordinate, ship) {
+  placeShip(x, y, ship) {
     for (let i = 0; i < ship.size; i++) {
-      if (ship.size > 1 && yCoordinate == 9) {
+      if (ship.size > 1 && y == 9) {
         return;
       } else {
-        this.board[xCoordinate][yCoordinate + i] = ship;
+        this.board[x][y + i] = ship;
       }
     }
     this.ships.push(ship);
   }
-  receiveAttack(xCoordinate, yCoordinate) {
-    if (
-      this.board[xCoordinate][yCoordinate] === 1 ||
-      (this.board[xCoordinate][yCoordinate] &&
-        typeof this.board[xCoordinate][yCoordinate].isSunk === "function" &&
-        this.board[xCoordinate][yCoordinate].isSunk() === true)
-    ) {
-      return;
-    } else {
-      if (this.board[xCoordinate][yCoordinate] != 0) {
-        this.board[xCoordinate][yCoordinate].hit();
+  receiveAttack(x, y) {
+    if (this.board[x][y] != 1) {
+      if (this.board[x][y] == 0) {
+        this.board[x][y] += 1;
+      } else {
+        this.board[x][y].hit();
+        this.board[x][y] = 1;
         this.ships.forEach((ship) => {
           if (ship.isSunk() == true) {
             this.sunkenShips += 1;
           }
         });
         if (this.sunkenShips >= this.ships.length) {
-            return "los";
+          return "los";
         }
-      } else {
-        this.board[xCoordinate][yCoordinate] = 1;
       }
+    } else {
+      return;
     }
   }
 }
