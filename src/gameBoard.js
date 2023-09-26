@@ -1,3 +1,5 @@
+import { Ships } from "./ships";
+
 class GameBoard {
   constructor(playerName) {
     this.board = this.createGameBoard();
@@ -31,20 +33,17 @@ class GameBoard {
     if (this.board[x][y] != 1) {
       if (this.board[x][y] == 0) {
         this.board[x][y] += 1;
-      } else {
-        this.board[x][y].hit();
-        this.board[x][y] = 2;
-        this.ships.forEach((ship) => {
-          if (ship.isSunk() == true) {
-            this.sunkenShips += 1;
-          }
-        });
-        if (this.sunkenShips >= this.ships.length) {
-          this.allShipsSank = true;
+      } else if (this.board[x][y] instanceof Ships) {
+        const ship = this.board[x][y];
+        ship.hit();
+        if (ship.isSunk()) {
+          this.sunkenShips += 1;
         }
+        this.board[x][y] = 2;
       }
-    } else {
-      return;
+      if (this.sunkenShips >= this.ships.length) {
+        this.allShipsSank = true;
+      }
     }
   }
 }

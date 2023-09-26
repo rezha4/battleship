@@ -44,7 +44,7 @@ function handlePlayerMove(e) {
   const x = parseInt(clickedCell.dataset.x);
   const y = parseInt(clickedCell.dataset.y);
 
-  if (playerTwo.board[x][y] == 1) {
+  if (playerTwo.board[x][y] == 1 || playerTwo.board[x][y] == 2) {
     console.log("invalid move");
     return;
   }
@@ -65,6 +65,9 @@ function handlePlayerMove(e) {
 function computerMove() {
   const x = Math.floor(Math.random() * 10);
   const y = Math.floor(Math.random() * 10);
+  if (playerOne.board[x][y] == 1 || playerOne.board[x][y] == 2) {
+    computerMove();
+  }
   playerOne.receiveAttack(x, y);
   removeAllChildNodes(playerOneBoard);
   renderBoard(playerOne, playerOneBoard);
@@ -76,6 +79,4 @@ function computerMove() {
   }
 }
 
-playerTwoBoard.addEventListener("click", handlePlayerMove)
-
-console.log("s")
+playerTwoBoard.addEventListener("click", handlePlayerMove);
